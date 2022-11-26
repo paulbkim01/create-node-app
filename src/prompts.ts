@@ -7,26 +7,30 @@ import { ROOT } from './constants.js'
 export { promptAppName, promptProjectType, promptAddons, promptPackageInstall }
 
 async function promptAppName(defaultAppName: string) {
-  const { appName } = await inquirer.prompt<{ appName: CliResults['appName'] }>({
-    name: 'appName',
-    type: 'input',
-    message: 'Provide name for the project',
-    default: defaultAppName,
-    validate: validateAppName,
-    transformer: (input: string) => {
-      return input.trim()
+  const { appName } = await inquirer.prompt<{ appName: CliResults['appName'] }>(
+    {
+      name: 'appName',
+      type: 'input',
+      message: 'Provide name for the project',
+      default: defaultAppName,
+      validate: validateAppName,
+      transformer: (input: string) => {
+        return input.trim()
+      },
     },
-  })
+  )
   return appName
 }
 
 async function promptProjectType() {
-  const { project } = await inquirer.prompt<{ project: CliResults['project'] }>({
-    name: 'project',
-    type: 'list',
-    message: 'What project template would you like to generate?',
-    choices: fs.readdirSync(`${ROOT}/template`),
-  })
+  const { project } = await inquirer.prompt<{ project: CliResults['project'] }>(
+    {
+      name: 'project',
+      type: 'list',
+      message: 'What project template would you like to generate?',
+      choices: fs.readdirSync(`${ROOT}/template`),
+    },
+  )
 
   return project
 }
@@ -40,7 +44,7 @@ interface AddonMap {
 }
 
 async function promptAddons<T extends CliResults['project']>(
-  project: T
+  project: T,
 ): Promise<Addons<AddonMap[T]>[]> {
   console.log(project)
   const subRoutines: Record<CliResults['project'], any> = {
@@ -188,7 +192,9 @@ async function promptWebsocketAddons(): Promise<WebsocketAddons[]> {
 
 async function promptPackageInstall(): Promise<boolean> {
   const pkgManager = getUserPkgManager()
-  const { install } = await inquirer.prompt<{ install: CliResults['installPackage'] }>({
+  const { install } = await inquirer.prompt<{
+    install: CliResults['installPackage']
+  }>({
     name: 'install',
     type: 'confirm',
     message: `Would you like to run '${pkgManager} install'?`,
@@ -196,7 +202,9 @@ async function promptPackageInstall(): Promise<boolean> {
   })
 
   if (!install) {
-    logger.info(`You can run '${pkgManager} install' later to install the dependencies.`)
+    logger.info(
+      `You can run '${pkgManager} install' later to install the dependencies.`,
+    )
   }
   logger.success("Alright. We'll install the dependencies for you!")
 

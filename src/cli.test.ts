@@ -2,8 +2,8 @@ import { expect, test } from 'vitest'
 import fs from 'node:fs'
 
 import { BASE_PROJECT_TEMPLATES } from './constants.js'
-import { runCli } from './cli.js'
-import { execa } from 'execa'
+// import { runCli } from './cli.js'
+// import { execa } from 'execa'
 
 test('Items in template base dir should match the source of truth', () => {
   const expected = BASE_PROJECT_TEMPLATES

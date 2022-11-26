@@ -7,6 +7,7 @@ specifiers:
   execa: ^6.1.0
   inquirer: ^9.1.4
   ora: ^6.1.2
+  prettier: ^2.8.0
   ts-node: ^10.9.1
   tsup: ^6.5.0
   vitest: ^0.25.3
@@ -20,6 +21,7 @@ dependencies:
 
 devDependencies:
   '@types/inquirer': 9.0.3
+  prettier: 2.8.0
   ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
   tsup: 6.5.0_2dtigtkb225m7ii7q45utxqwgi
   vitest: 0.25.3
@@ -1063,6 +1065,12 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
+
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /punycode/2.1.1:

@@ -7,7 +7,7 @@ import {
   promptPackageInstall,
   promptProjectType,
 } from './prompts.js'
-import { logger, validateAppName } from './utils/index.js'
+import { logger } from './utils/index.js'
 import { VERSION } from './constants.js'
 
 export interface CliOptions {
@@ -34,7 +34,7 @@ export async function runCli(): Promise<CliResults> {
     .description('A CLI for')
     .argument(
       '[dir]',
-      'The name of the application, as well as the name of the directory to create'
+      'The name of the application, as well as the name of the directory to create',
     )
     .version(VERSION, '-v, --version', 'Display the version of create-node-app')
     .parse(process.argv)
@@ -55,7 +55,10 @@ export async function runCli(): Promise<CliResults> {
       installPackage,
     }
   } catch (err) {
-    if (err instanceof Error && (err as Error & { isTTYError: boolean }).isTTYError) {
+    if (
+      err instanceof Error &&
+      (err as Error & { isTTYError: boolean }).isTTYError
+    ) {
       logger.warn(`Interactive terminal required`)
       logger.info(`Bootstrapping a default app in ./${initialAppName}`)
       process.exit(0)
